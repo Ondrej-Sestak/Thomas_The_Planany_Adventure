@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2mgq2mabbqf4"]
+
+[ext_resource type="Texture2D" uid="uid://xlcworn681rw" path="res://Pixel-art/player).png" id="1_a2x70"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_e1ao7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8o1w4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a2x70")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f3nm"]
+size = Vector2(10, 19)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_e1ao7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_8o1w4")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -10.5)
+shape = SubResource("RectangleShape2D_6f3nm")
