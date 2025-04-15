@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://be51m2vtlj3ji"
+path="res://.godot/imported/walking enemy.wav-7f556474bf2566e46da7b9eb47855fc9.sample"
+
+[deps]
+
+source_file="res://Sounds/walking enemy.wav"
+dest_files=["res://.godot/imported/walking enemy.wav-7f556474bf2566e46da7b9eb47855fc9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
