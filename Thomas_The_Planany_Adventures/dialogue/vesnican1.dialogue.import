@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://2rktvmyrgc67"
+path="res://.godot/imported/vesnican1.dialogue-38d244f02f4b684079e623a1ae3e1fc2.tres"
+
+[deps]
+
+source_file="res://dialogue/vesnican1.dialogue"
+dest_files=["res://.godot/imported/vesnican1.dialogue-38d244f02f4b684079e623a1ae3e1fc2.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,203 @@
+~ start
+set Globalni.dialog_status = "enable"
+Plaňanský vesničan: Zdravím Tomáši, slyšel jsem co se ti stalo s autem, hrůza! Měl bys vyrazit do Kolína si ho nechat opravit, třeba cestou narazíš na nějaké náhradní součástky!
+
+if Globalni.sebeobrana == false:
+	Plaňanský vesničan: Je to tu velice nebezpečné, samý afričan, měl by sis dávat pozor
+	if Globalni.mode == "Mode: Hard":
+				Plaňanský vesničan: Zvolil sis úroveň obtížnosti težkou, proto máš tři životy, po jejich vyčerpání musíš začít zcela od začátku
+	if Globalni.sebeobrana == false:
+		Plaňanský vesničan: Myslím, že jsem viděl na střeše činku, mohl by ses s její pomocí bránit
+		if Globalni.sebeobrana == false:
+			Plaňanský vesničan: Zkus se tam dostat přes parapet okna, ale pozor, máš omezený počet činek, které jsou v Plaňanech. Neplýtvej s nimi.
+			
+	
+elif Globalni.sebeobrana == true:
+	Plaňanský vesničan: Dobrá práce, našel jsi to!
+
+Tomáš: Děkuji!
+
+
+set Globalni.dialog_status = "disable"
+=> END
+
+~ dialogII
+set Globalni.dialog_status = "enable"
+Plaňanský vesničan: Ahoj
+if Globalni.sebeobrana == false:
+	Plaňanský vesničan: Měl by sis najít něco na sebeobranu!
+	if Globalni.sebeobrana == false:
+		Tomáš: Já zvedám pouze lehké činky.
+elif Globalni.sebeobrana == true:
+	Plaňanský vesničan: Ta činka vypadá hodně težce
+	elif Globalni.sebeobrana == true:
+		Tomáš: Já zvedám pouze težké činky.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ kolobezka
+set Globalni.dialog_status = "enable"
+Tomáš: Koloběžka! To bych se mohl trochu projet.
+if Globalni.enemy_count < 15:
+	Tomáš: Co mě to napadá, musím nejdříve pomoct nebohým obyvatelům Plaňan, ještě nějací afričaní tu jsou!
+if Globalni.enemy_count == 15:
+	Tomáš: Plaňanské obyvatele jsem před tou hrůzou zachránil, nyní můžu odjet.
+	set Globalni.levelIdone = true
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ quest
+set Globalni.dialog_status = "enable"
+Plaňanský vesničan: Zdravím! 
+if Globalni.sebeobrana == false:
+	Plaňanský vesničan: Měl bys najít něco na sebeobranu
+	if Globalni.sebeobrana == false:
+		Tomáš: To je pravda!
+if Globalni.sebeobrana == true:
+	Plaňanský vesničan: Vidím že máš zbraň, potřebujeme tvou pomoc!
+	if Globalni.sebeobrana == true:
+		Plaňanský vesničan: Plaňany již nejsou bezpečné! Musíš se postavit všem těm afričanům a vyhnat je odsud
+		if Globalni.sebeobrana == true:
+			Plaňanský vesničan: Až se ti povede odehnat všech 15, budeš moct vyrazit elektrokoloběžkou na svou cestu
+			if Globalni.sebeobrana == true:
+				Tomáš: Nebojte, ochráním vás!
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ pruvodci
+set Globalni.dialog_status = "enable"
+Pečlivý až otravný průvodčí: Máš lístek?
+if Globalni.listek_visible == false:
+	Tomáš: Nemám, Pane průvodčí!
+	if Globalni.listek_visible == false:
+		Pečlivý až otravný průvodčí: Tak co tady děláš!
+if Globalni.listek_visible == true:
+	Tomáš: Mám, Pane průvodčí!
+	if Globalni.listek_visible == true:
+		Pečlivý až otravný průvodčí: Jen aby ty vydřiduchu
+		set Globalni.levelIIdone = true
+set Globalni.dialog_status = "disable"
+=> END! 
+
+~ houbar
+set Globalni.dialog_status = "enable"
+if Globalni.listek_visible == true:
+	Šílený biolog: Už pro tebe nic nemáme.
+
+if Globalni.level2_quest == true and Globalni.houby != 10 and Globalni.listek_visible == false:
+	Šílený biolog: Říkali jsme všechny houby co v tom lese najdeš, tohle je málo!
+	if Globalni.level2_quest == true and Globalni.houby>10:
+		Šílený biolog: Musíš se snažit víc!
+
+if Globalni.level2_quest == false
+	Šílený biolog: Zdravíme pocestný! Potřebovali bychom pomoct hledat houby.
+	if Globalni.level2_quest == false:
+		Tomáš: Co za to?
+		if Globalni.level2_quest == false:
+			Šílený biolog: Dáme ti lístek na vlak ty vydřiduchu!
+			set Globalni.level2_quest = true
+
+if Globalni.houby == 10 and Globalni.listek_visible == false:
+	Šílený biolog: Skvěle, takhle to má být!
+	if Globalni.houby == 10:
+		Šílený biolog: Tady máš lístek na vlak.
+		set Globalni.listek_visible = true
+
+set Globalni.level2_quest = true
+set Globalni.dialog_status = "disable"
+=> END! 
+
+~ tabule
+set Globalni.dialog_status = "enable"
+Tomáš: Ha! Příklady z matematiky, vypadá to lehce.
+set Globalni.tabulevyplnena = true
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ kosatky
+set Globalni.dialog_status = "enable"
+if Globalni.level2_quest == false
+	Kolemjdoucí z Milovic: Dneska je tak krásné počasí.
+	if Globalni.level2_quest == false
+		Vesničan od Košáteckého potoka: Actually ano.
+if Globalni.level2_quest == true
+	Kolemjdoucí z Milovic: Vidíš tu houbu na stromě?
+	if Globalni.level2_quest == true
+		Vesničan od Košáteckého potoka: Mohl bys tam zkusit vyskočit přes ty malé stromky.
+Tomáš: Super, děkuji za informaci, mějte se hezky.
+Kolemjdoucí z Milovic: Bye bye bye.
+Vesničan od Košáteckého potoka: Měj se krásně a skládej básně.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ telocvicna
+set Globalni.dialog_status = "enable"
+Tělocvikář s vnitřními démony: Zdravím pane Zádis.
+if Globalni.max_jumps == 1: 
+	Tělocvikář s vnitřními démony: Myslím že bych tě mohl naučit dvojitý skok.
+	set Globalni.max_jumps = 2:
+Tělocvikář s vnitřními démony: Pro dvojitý skok stiskni dvakrát mezerník
+Tomáš: Děkuju mnohokrát pane.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ ondra
+set Globalni.dialog_status = "enable"
+Hrdý spojař: Ahoj Tomáši.
+if Globalni.sebeobrana == true:
+	Hrdý spojař: Jestli se chceš dostat na půdu, tak na otevření dveří budeš potřebovat klíč.
+	if Globalni.sebeobrana == true:
+		Hrdý spojař: Měl by tu někde být!
+		if Globalni.sebeobrana == true:
+			Hrdý spojař: A opatrně na netopýry, jakmile tě uvidí, nepřestanou tě pronásledovat.
+Tomáš: Díky moc.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ linh
+set Globalni.dialog_status = "enable"
+Kolínský pravicový obchodník: Ahoj
+if Globalni.levelIIIquest == true:
+	Kolínský pravicový obchodník: Spoje jsou kousek za nádražím.
+if Globalni.levelIIIquest == false:
+	Kolínský pravicový obchodník: Ty jsi ten co se vyboural na banánu žejo.
+	if Globalni.levelIIIquest == false:
+		Kolínský pravicový obchodník: Myslím že by ti pomohlo podívat se na spoje, je to hned za nádražím.
+	set Globalni.levelIIIquest = true
+Tomáš: Super, díky ti dobrý muži.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ matej
+set Globalni.dialog_status = "enable"
+Karate kid: Ahoj, vítej na spojích!
+if Globalni.sebeobrana == true:
+	Karate kid: Slyšel jsem co se ti stalo.
+	if Globalni.sebeobrana == true:
+		Karate kid: Zkus se dostat na půdu.
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ spoje
+set Globalni.dialog_status = "enable"
+Tomáš: Tohle by mělo být ono!
+set Globalni.levelIIIdone = true
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ konechry
+set Globalni.dialog_status = "enable"
+Tomáš: To je krása!
+if Globalni.levelIVdone == false:
+	Tomáš: Uvidíme ještě jestli mám dost peněz na opravu
+	set Globalni.levelIVdone = true
+set Globalni.dialog_status = "disable"
+=> END!
+
+~ leos
+set Globalni.dialog_status = "enable"
+Litolský kanonýr: Ten plot se musí přeskočit z nějaké výšky.
+if Globalni.sebeobrana == true:
+	Tomáš: Děkuji ti legendo.
+set Globalni.dialog_status = "disable"
+=> END!
