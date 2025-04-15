@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc4r5e64ai46d"]
+
+[ext_resource type="Texture2D" uid="uid://ddcypgx6u5cw8" path="res://Fantasy Pack Free Tier/log.png" id="1_ns1ol"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kt4ar"]
+size = Vector2(30, 11)
+
+[node name="platform_log" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ns1ol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_kt4ar")
+one_way_collision = true

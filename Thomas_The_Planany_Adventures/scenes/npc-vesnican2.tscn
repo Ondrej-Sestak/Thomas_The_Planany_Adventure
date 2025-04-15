@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bglgtu36oh37t"]
+
+[ext_resource type="Texture2D" uid="uid://c07k6mk21f52h" path="res://images/NPC/npc.png" id="1_lgrvf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1oaq"]
+atlas = ExtResource("1_lgrvf")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guu8o"]
+atlas = ExtResource("1_lgrvf")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quwwp"]
+animations = [{
+"frames": [{
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_x1oaq")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_guu8o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="NPS skeleton" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -27)
+scale = Vector2(1.785, 1.785)
+sprite_frames = SubResource("SpriteFrames_quwwp")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.965718
+flip_h = true

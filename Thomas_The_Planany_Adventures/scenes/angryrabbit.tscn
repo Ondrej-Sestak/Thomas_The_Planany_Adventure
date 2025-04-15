@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dba2fpdntqfke"]
+
+[ext_resource type="Script" path="res://scripts/angryrabbit.gd" id="1_eai6r"]
+[ext_resource type="Texture2D" uid="uid://drxrimbcb3w7y" path="res://images/angry rabbit.png" id="2_b7ig8"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="3_glinw"]
+[ext_resource type="AudioStream" uid="uid://cf0kh68ridyho" path="res://Sounds/netopyr.mp3" id="4_00mvg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2qao"]
+atlas = ExtResource("2_b7ig8")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddq3m"]
+atlas = ExtResource("2_b7ig8")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbcpt"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_y2qao")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ddq3m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko7vb"]
+size = Vector2(7.57117, 11.7453)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b18wg"]
+size = Vector2(17, 16)
+
+[node name="enemy_knight" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_eai6r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, 2)
+scale = Vector2(0.459, 0.459)
+sprite_frames = SubResource("SpriteFrames_rbcpt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.582969
+flip_h = true
+
+[node name="killzone" parent="." instance=ExtResource("3_glinw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-1, 5.83478)
+scale = Vector2(1.84912, -1.33411)
+shape = SubResource("RectangleShape2D_ko7vb")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-1.5, 6)
+shape = SubResource("RectangleShape2D_b18wg")
+
+[node name="zvukkralik" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_00mvg")
+volume_db = -25.0
+autoplay = true
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="finished" from="zvukkralik" to="." method="_on_zvukkralik_finished"]

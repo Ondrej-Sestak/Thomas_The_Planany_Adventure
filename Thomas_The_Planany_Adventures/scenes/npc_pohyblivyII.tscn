@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://er05cue3ebah"]
+
+[ext_resource type="Script" path="res://scripts/npc_pohyblivy.gd" id="1_cx67n"]
+[ext_resource type="Texture2D" uid="uid://cnxt3jlke83p" path="res://images/NPC/npc-nadraziII.png" id="2_wrfxo"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="3_8wg8m"]
+[ext_resource type="AudioStream" uid="uid://qctp82kjd7ph" path="res://Sounds/npc.mp3" id="4_ksm26"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc8sa"]
+atlas = ExtResource("2_wrfxo")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1brp"]
+atlas = ExtResource("2_wrfxo")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbx24"]
+atlas = ExtResource("2_wrfxo")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr7h2"]
+atlas = ExtResource("2_wrfxo")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbcpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc8sa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1brp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbx24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr7h2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="enemy_knight" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_cx67n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(1.638, 1.638)
+sprite_frames = SubResource("SpriteFrames_rbcpt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.364416
+flip_h = true
+
+[node name="killzone" parent="." instance=ExtResource("3_8wg8m")]
+
+[node name="raycast_left" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(-13.2248, 12)
+
+[node name="raycast_right" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(13.2248, 12)
+
+[node name="floor_raycast_right" type="RayCast2D" parent="."]
+position = Vector2(10, 0)
+target_position = Vector2(0, 19)
+
+[node name="floor_raycast_left" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 19)
+
+[node name="npc" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ksm26")
+autoplay = true

@@ -1,0 +1,152 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsqgt8w3sn4hb"]
+
+[ext_resource type="Script" path="res://scripts/cutscenakolobezka.gd" id="1_ggfyh"]
+[ext_resource type="Texture2D" uid="uid://ckxx66vm7kla4" path="res://images/les_louka2.png" id="2_4s84m"]
+[ext_resource type="Texture2D" uid="uid://dykm730m118tj" path="res://images/kolobezka.png" id="3_a8gne"]
+[ext_resource type="Texture2D" uid="uid://c3gwi7854560p" path="res://images/player/hrac.png" id="4_0aly4"]
+[ext_resource type="AudioStream" uid="uid://ds14ghh8fv3fw" path="res://Sounds/kolobezka.mp3" id="5_mpd5e"]
+
+[sub_resource type="Animation" id="Animation_ayue5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hrac:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(212, 814)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Kolobezka:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(182, 715)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LesLouka2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1944, 552)]
+}
+
+[sub_resource type="Animation" id="Animation_3lr1m"]
+resource_name = "jizda_autem"
+length = 7.58
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.96667, 7, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hrac:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(212, 814), Vector2(457, 849), Vector2(621, 809), Vector2(873, 859), Vector2(986, 801), Vector2(1220, 824), Vector2(1220, 824), Vector2(1401, 837)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Kolobezka:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(182, 715), Vector2(419, 748), Vector2(570, 708), Vector2(832, 756), Vector2(943, 698), Vector2(1180, 723), Vector2(1180, 723), Vector2(1344, 733)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LesLouka2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1944, 552), Vector2(1855, 552), Vector2(1537, 552), Vector2(1245, 552), Vector2(950, 552), Vector2(532, 552), Vector2(194, 552), Vector2(-48, 549)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdojj"]
+_data = {
+"RESET": SubResource("Animation_ayue5"),
+"jizda_autem": SubResource("Animation_3lr1m")
+}
+
+[node name="Cutscena" type="CanvasLayer"]
+script = ExtResource("1_ggfyh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mdojj")
+}
+autoplay = "jizda_autem"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 11
+offset_right = 1924.0
+offset_bottom = 1078.0
+color = Color(0, 0, 0, 1)
+
+[node name="LesLouka2" type="Sprite2D" parent="."]
+position = Vector2(1944, 552)
+scale = Vector2(12.6222, 12.6222)
+texture = ExtResource("2_4s84m")
+
+[node name="Kolobezka" type="Sprite2D" parent="."]
+position = Vector2(182, 715)
+scale = Vector2(4.4, 4.4)
+texture = ExtResource("3_a8gne")
+flip_h = true
+
+[node name="Hrac" type="Sprite2D" parent="."]
+position = Vector2(212, 814)
+scale = Vector2(13.02, 13.02)
+texture = ExtResource("4_0aly4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mpd5e")
+autoplay = true

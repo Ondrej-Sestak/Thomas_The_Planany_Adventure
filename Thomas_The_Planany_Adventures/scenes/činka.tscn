@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://dytg4jy57ma8i"]
+
+[ext_resource type="Script" path="res://scripts/činka.gd" id="1_px74x"]
+[ext_resource type="Texture2D" uid="uid://dfgf5tmq3v2q7" path="res://images/cinka.png" id="1_qb2fp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjeex"]
+size = Vector2(27, 12)
+
+[sub_resource type="Animation" id="Animation_b6856"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.53674e-07, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DetectionArea/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_751x1"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-9.53674e-07, 1), Vector2(-9.53674e-07, 7), Vector2(0, 1), Vector2(0, -5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DetectionArea/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 8), Vector2(0, 2), Vector2(0, -4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmu4b"]
+_data = {
+"RESET": SubResource("Animation_b6856"),
+"idle": SubResource("Animation_751x1")
+}
+
+[node name="Činka" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_px74x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 1)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("1_qb2fp")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_wjeex")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pmu4b")
+}
+autoplay = "idle"
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

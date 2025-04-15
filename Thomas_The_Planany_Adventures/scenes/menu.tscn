@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccetgo8utlcy1"]
+
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_ka7x6"]
+[ext_resource type="FontFile" uid="uid://dsa0wwoxagbr" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_3ppuh"]
+[ext_resource type="Theme" uid="uid://co56ai25f5dd4" path="res://default.tres" id="2_kgqgd"]
+[ext_resource type="Texture2D" uid="uid://c1wk83eu0mt7s" path="res://images/uvodni.png" id="3_2h07x"]
+[ext_resource type="FontFile" uid="uid://bfogft582ect0" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_o87at"]
+[ext_resource type="AudioStream" uid="uid://dxo2ltu5hlff0" path="res://Sounds/rock-uvod.mp3" id="6_e41c6"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ka7x6")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -3.0
+offset_right = -4.0
+offset_bottom = 263.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2h07x")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.0
+offset_top = -940.0
+offset_right = 800.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TITLE" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.89059, 0.89059, 0.89059, 1)
+theme_override_fonts/font = ExtResource("3_o87at")
+theme_override_font_sizes/font_size = 128
+text = "THOMAS
+THE PLANANY
+ADVENTURE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+
+[node name="VSeparator4" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kgqgd")
+theme_override_fonts/font = ExtResource("2_3ppuh")
+theme_override_font_sizes/font_size = 48
+text = "HRAT"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kgqgd")
+theme_override_fonts/font = ExtResource("2_3ppuh")
+theme_override_font_sizes/font_size = 48
+text = "KONEC"
+
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="znelka" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_e41c6")
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

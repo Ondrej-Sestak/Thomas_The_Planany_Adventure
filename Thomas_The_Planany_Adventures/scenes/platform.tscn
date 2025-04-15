@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0kgf3ds2h12s"]
+
+[ext_resource type="Texture2D" uid="uid://beicbvusodwi1" path="res://images/vytah-predni.png" id="1_ucths"]
+[ext_resource type="Texture2D" uid="uid://cs0wekbhtkbnq" path="res://images/vytah-zadni.png" id="2_oh5hh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecvpt"]
+size = Vector2(69, 3)
+
+[node name="vytah" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15.1875, -36.1875)
+texture = ExtResource("1_ucths")
+region_rect = Rect2(16, 16, 32, 8.88961)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(15, -36)
+texture = ExtResource("2_oh5hh")
+region_rect = Rect2(16, 16, 32, 8.88961)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 4)
+shape = SubResource("RectangleShape2D_ecvpt")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(15, -61)
+shape = SubResource("RectangleShape2D_ecvpt")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-17, -31)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_ecvpt")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(15.5, -75)
+shape = SubResource("RectangleShape2D_ecvpt")
+one_way_collision = true

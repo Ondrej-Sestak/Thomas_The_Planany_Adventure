@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://skrkna61p8jh"]
+
+[ext_resource type="Texture2D" uid="uid://dt6jgx1828rwj" path="res://images/protein-heal.png" id="1_8341s"]
+[ext_resource type="Script" path="res://scripts/heal.gd" id="1_anvn2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_426w2"]
+size = Vector2(11.5, 16.5)
+
+[node name="Heal" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_anvn2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(0.357143, 0.357143)
+texture = ExtResource("1_8341s")
+
+[node name="Detection" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+position = Vector2(0.25, -0.75)
+shape = SubResource("RectangleShape2D_426w2")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]

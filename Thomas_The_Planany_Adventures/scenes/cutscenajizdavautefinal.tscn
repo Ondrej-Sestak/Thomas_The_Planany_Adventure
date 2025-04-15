@@ -1,0 +1,339 @@
+[gd_scene load_steps=22 format=3 uid="uid://xa04j1gr27c8"]
+
+[ext_resource type="Script" path="res://scripts/cutscenajizdavautefinal.gd" id="1_3cdxk"]
+[ext_resource type="Texture2D" uid="uid://dpjl22ngvnek8" path="res://images/cesta.png" id="2_e7oyp"]
+[ext_resource type="Texture2D" uid="uid://df0h6feq4ic03" path="res://images/auto.png" id="3_kd0x7"]
+[ext_resource type="Texture2D" uid="uid://digrw8pgniioq" path="res://images/kolo.png" id="4_330tf"]
+[ext_resource type="Texture2D" uid="uid://cd2fnpd628iwv" path="res://images/cesta-finalFrame.png" id="5_70xpx"]
+[ext_resource type="AudioStream" uid="uid://2um3x4tie8pd" path="res://Sounds/autocutscena.mp3" id="6_gq5ci"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6tr6"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(640, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12ux7"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(800, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7dsp"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(960, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt2u5"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(1120, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv71h"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(1280, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85val"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(1440, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkrof"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(1600, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7nto"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(0, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4fln"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(160, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pp0o"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(320, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4wb2"]
+atlas = ExtResource("2_e7oyp")
+region = Rect2(480, 0, 160, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebx2j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6tr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12ux7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7dsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt2u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv71h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85val")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkrof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7nto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4fln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pp0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4wb2")
+}],
+"loop": true,
+"name": &"first",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_ayue5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("auto:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(204, 500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("kolo:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(241, 623)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("kolo:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("kolo2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(546, 624)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("kolo2:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3lr1m"]
+resource_name = "jizda_autem"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("auto:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.03333, 3.76667, 5.33333, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 646), Vector2(300, 619), Vector2(480, 653), Vector2(624, 662), Vector2(839, 632), Vector2(2009, 632)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("kolo2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.03333, 3.76667, 5.33333, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(349, 773), Vector2(640, 749), Vector2(821, 781), Vector2(965, 792), Vector2(1179, 763), Vector2(2351, 763)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("kolo2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("kolo:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.03333, 3.76667, 5.33333, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(50, 777), Vector2(340, 749), Vector2(520, 780), Vector2(666, 792), Vector2(879, 759), Vector2(2048, 759)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = false
+tracks/6/path = NodePath("kolo:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdojj"]
+_data = {
+"RESET": SubResource("Animation_ayue5"),
+"jizda_autem": SubResource("Animation_3lr1m")
+}
+
+[node name="Cutscenajizdavautefinal" type="CanvasLayer"]
+script = ExtResource("1_3cdxk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(963.5, 539)
+scale = Vector2(12.0313, 12)
+sprite_frames = SubResource("SpriteFrames_ebx2j")
+animation = &"first"
+frame_progress = 0.0599735
+
+[node name="auto" type="TextureRect" parent="."]
+z_index = 5
+offset_left = 204.0
+offset_top = 500.0
+offset_right = 724.0
+offset_bottom = 780.0
+texture = ExtResource("3_kd0x7")
+
+[node name="kolo" type="TextureRect" parent="."]
+z_index = 10
+offset_left = 241.0
+offset_top = 623.0
+offset_right = 395.0
+offset_bottom = 730.0
+texture = ExtResource("4_330tf")
+
+[node name="kolo2" type="TextureRect" parent="."]
+z_index = 10
+offset_left = 546.0
+offset_top = 624.0
+offset_right = 700.0
+offset_bottom = 731.0
+texture = ExtResource("4_330tf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mdojj")
+}
+autoplay = "jizda_autem"
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+z_index = -1
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 1922.0
+offset_bottom = 1079.0
+texture = ExtResource("5_70xpx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 11
+offset_right = 1924.0
+offset_bottom = 1078.0
+scale = Vector2(3.46, 3.46)
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_gq5ci")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_Animated_Sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

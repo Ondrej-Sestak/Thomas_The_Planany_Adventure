@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2jytfsjs10ti"]
+
+[ext_resource type="Script" path="res://scripts/cutscenaautobus.gd" id="1_a8uid"]
+[ext_resource type="Texture2D" uid="uid://itmaiff1pll4" path="res://images/zastavka.png" id="2_dj7pe"]
+[ext_resource type="Texture2D" uid="uid://cs65vbk0bl1py" path="res://images/autobus.png" id="3_mcnim"]
+[ext_resource type="Texture2D" uid="uid://c3gwi7854560p" path="res://images/player/hrac.png" id="4_vkv7n"]
+[ext_resource type="AudioStream" uid="uid://56yl68k7xc6n" path="res://Sounds/autobus.mp3" id="5_xkeam"]
+
+[sub_resource type="Animation" id="Animation_ayue5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Autobus:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1017, 171)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hrac:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_p02j0"]
+resource_name = "autobus"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Autobus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.53333, 4, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1017, 171), Vector2(931, 171), Vector2(931, 171), Vector2(2853, 171)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hrac:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3lr1m"]
+resource_name = "jizda_autem"
+length = 7.58
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.96667, 7, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+
+[sub_resource type="Animation" id="Animation_ni58u"]
+resource_name = "jizdavlakem"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7.23333, 7.26667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdojj"]
+_data = {
+"RESET": SubResource("Animation_ayue5"),
+"autobus": SubResource("Animation_p02j0"),
+"jizda_autem": SubResource("Animation_3lr1m"),
+"jizdavlakem": SubResource("Animation_ni58u")
+}
+
+[node name="Cutscena" type="CanvasLayer"]
+script = ExtResource("1_a8uid")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mdojj")
+}
+autoplay = "autobus"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 11
+offset_right = 1924.0
+offset_bottom = 1078.0
+scale = Vector2(2.17, 2.17)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_right = 1924.0
+offset_bottom = 1078.0
+color = Color(0.351702, 0.459645, 0.837244, 1)
+
+[node name="Zastavka" type="Sprite2D" parent="."]
+position = Vector2(966, 311)
+scale = Vector2(9.77, 7.86)
+texture = ExtResource("2_dj7pe")
+
+[node name="Autobus" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-1017, 171)
+scale = Vector2(25.6929, 25.6929)
+texture = ExtResource("3_mcnim")
+
+[node name="Hrac" type="Sprite2D" parent="."]
+position = Vector2(909, 713)
+scale = Vector2(14.71, 14.71)
+texture = ExtResource("4_vkv7n")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_xkeam")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,445 @@
+[gd_scene load_steps=42 format=3 uid="uid://b0b4wi8qwfxb6"]
+
+[ext_resource type="Texture2D" uid="uid://d2vbnkh63ekd5" path="res://images/player/emote.png" id="1_a36xu"]
+[ext_resource type="Texture2D" uid="uid://tsewgm3s6bv8" path="res://images/player/player.png" id="2_0qu11"]
+[ext_resource type="Texture2D" uid="uid://wnqkvvh6qtw3" path="res://images/player/idle-player.png" id="2_ofkyl"]
+[ext_resource type="Texture2D" uid="uid://dei54lf3agiq3" path="res://images/player/meleatack.png" id="3_7fjom"]
+[ext_resource type="Texture2D" uid="uid://dr4chkcg7c0eb" path="res://images/player/run.png" id="3_nghpw"]
+[ext_resource type="AudioStream" uid="uid://be51m2vtlj3ji" path="res://Sounds/walking enemy.wav" id="6_pfjje"]
+
+[sub_resource type="GDScript" id="GDScript_7g4wj"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 140.0
+const JUMP_VELOCITY = -250.0
+var jump_count = 0
+
+# Konstanty pro dash
+const DASH_SPEED = 0 #300
+const DASH_DURATION = 0 #0.3
+var is_dashing = false
+var dash_time_left = 10.0
+var can_dash_in_air = false 
+
+# Časový interval pro dvojitý stisk
+const DOUBLE_TAP_TIME = 0.2
+var last_left_press_time = 0.0
+var last_right_press_time = 0.0
+
+var emote_pressed = false
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var actionable_finder: Area2D = $Direction/ActionableFinder
+
+@onready var BulletScene = preload(\"res://scenes/bullet.tscn\")
+@onready var canvaslayer: KnightCanvas = $\"../CanvasLayer\"
+
+
+func _physics_process(delta):
+	if not is_on_floor() and not is_dashing:
+		velocity.y += gravity * delta
+
+	if is_on_floor():
+		jump_count = 0
+		can_dash_in_air = false
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"jump\") and jump_count < Globalni.max_jumps and Globalni.dialog_status == \"disable\":
+		$Soundy/Jump.play()
+		velocity.y = JUMP_VELOCITY
+		jump_count += 1
+	
+	if Input.is_action_just_pressed(\"dialogue\") and Globalni.dialog_status == \"disable\":
+		var actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0:
+			actionables[0].action()
+			return
+			
+	#var direction = Input.get_axis(\"move_left\", \"move_right\")
+	
+	var direction = 0.0
+	if Globalni.dialog_status == \"disable\":
+		direction = Input.get_axis(\"move_left\", \"move_right\")
+	
+	#emote_pressed = direction ==0
+	#print(direction)
+	#print(emote_pressed)
+	if Input.is_action_just_pressed(\"emote\") and Globalni.dialog_status == \"disable\":
+		emote_pressed = true
+	
+	if Input.is_action_just_pressed(\"move_left\"):
+		if Time.get_ticks_msec() / 1000.0 - last_left_press_time < DOUBLE_TAP_TIME and not is_dashing:
+			if is_on_floor() or can_dash_in_air:
+				$chuze.play()
+				is_dashing = true
+				dash_time_left = DASH_DURATION
+				velocity.x = -DASH_SPEED
+				animated_sprite.play(\"dash\")
+				if not is_on_floor():
+					can_dash_in_air = false
+		last_left_press_time = Time.get_ticks_msec() / 1000.0
+
+	# Zpracování dvojitého stisku klávesy \"D\" pro dash doprava
+	if Input.is_action_just_pressed(\"move_right\"):
+		if Time.get_ticks_msec() / 1000.0 - last_right_press_time < DOUBLE_TAP_TIME and not is_dashing:
+			if is_on_floor() or can_dash_in_air:
+				$chuze.play()
+				is_dashing = true
+				dash_time_left = DASH_DURATION
+				velocity.x = DASH_SPEED
+				animated_sprite.play(\"dash\")
+				if not is_on_floor():
+					can_dash_in_air = false
+		last_right_press_time = Time.get_ticks_msec() / 1000.0
+
+	if is_dashing:
+		dash_time_left -= delta
+		if dash_time_left <= 0.0:
+			is_dashing = false
+			velocity.x = 0
+
+	# Ostatní pohybové zpracování
+	if not is_dashing:
+		if direction > 0:
+			emote_pressed =false
+			animated_sprite.flip_h = false
+		elif direction < 0:
+			emote_pressed =false
+			animated_sprite.flip_h = true
+
+		if is_on_floor():
+			if emote_pressed:
+				animated_sprite.play(\"Emote\")
+			elif direction == 0:
+				animated_sprite.play(\"Idle\")
+			else:
+				animated_sprite.play(\"Run\")
+		else:
+			animated_sprite.play(\"Jump\")
+
+		if direction:
+			velocity.x = direction * SPEED 
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			
+	if Input.is_action_just_pressed(\"shoot\") and Globalni.cinky > 0 and Globalni.sebeobrana==true and Globalni.dialog_status == \"disable\":
+		Globalni.cinky -= 1
+		$Soundy/Shoot.play()
+		canvaslayer.naboje_count()
+		shoot()
+			
+	#if Input.is_action_just_pressed(\"emote\"):
+		#animated_sprite.play(\"dash\")
+		#print(\"emote\")
+	
+	
+	move_and_slide()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if $AnimatedSprite2D.get_animation() == \"Emote\":
+		emote_pressed = false
+
+func shoot():
+	var bullet = BulletScene.instantiate()
+	if bullet:
+		bullet.position = global_position
+		# Pokud hráč není otočen, střílíme doprava, jinak doleva.
+		if animated_sprite.flip_h:
+			bullet.direction = Vector2.LEFT
+		else:
+			bullet.direction = Vector2.RIGHT
+		get_tree().current_scene.add_child(bullet)
+	else:
+		print(\"Nepodařilo se vytvořit instanci bullet!\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ds14"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63v24"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f461f"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piosv"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joab1"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(120, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n445x"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(150, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld4uy"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(180, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bstc"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(210, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3asgk"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(240, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n718v"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(270, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wivp"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(300, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a51g8"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(330, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_womrl"]
+atlas = ExtResource("1_a36xu")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hux1p"]
+atlas = ExtResource("2_ofkyl")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wma8w"]
+atlas = ExtResource("2_ofkyl")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kcx0"]
+atlas = ExtResource("2_0qu11")
+region = Rect2(240, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syjym"]
+atlas = ExtResource("3_nghpw")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxtq2"]
+atlas = ExtResource("3_nghpw")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcu7b"]
+atlas = ExtResource("3_nghpw")
+region = Rect2(180, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53aa5"]
+atlas = ExtResource("3_nghpw")
+region = Rect2(150, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4f0b1"]
+atlas = ExtResource("2_0qu11")
+region = Rect2(120, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unaep"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqtja"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afby1"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m862d"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a1h8"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(200, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y2mv"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(250, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv6q7"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(300, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqyhs"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(350, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gknnq"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(400, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2l67"]
+atlas = ExtResource("3_7fjom")
+region = Rect2(450, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4h76q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ds14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63v24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f461f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piosv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joab1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n445x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld4uy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bstc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3asgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n718v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wivp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a51g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_womrl")
+}],
+"loop": false,
+"name": &"Emote",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hux1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wma8w")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kcx0")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syjym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxtq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcu7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53aa5")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f0b1")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unaep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqtja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afby1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m862d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a1h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y2mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv6q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqyhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gknnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2l67")
+}],
+"loop": true,
+"name": &"melee",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjdc0"]
+size = Vector2(14.5, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2xt5"]
+size = Vector2(29, 20)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
+collision_layer = 3
+script = SubResource("GDScript_7g4wj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7.5, -24.5)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_4h76q")
+animation = &"Run"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.75, -13)
+shape = SubResource("RectangleShape2D_jjdc0")
+
+[node name="Direction" type="Marker2D" parent="."]
+
+[node name="ActionableFinder" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/ActionableFinder"]
+position = Vector2(8.5, -14)
+shape = SubResource("RectangleShape2D_q2xt5")
+
+[node name="chuze" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_pfjje")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

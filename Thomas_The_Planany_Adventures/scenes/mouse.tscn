@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dchh61hl2a1da"]
+
+[ext_resource type="Texture2D" uid="uid://dbtowgm8wa2tx" path="res://images/mouse-spritesheet.png" id="1_mdj10"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pjr5"]
+atlas = ExtResource("1_mdj10")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pdb"]
+atlas = ExtResource("1_mdj10")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i1ndw"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_7pjr5")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_i3pdb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="mouse" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -6)
+scale = Vector2(1.23312, 1.23312)
+sprite_frames = SubResource("SpriteFrames_i1ndw")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.611242
+flip_h = true

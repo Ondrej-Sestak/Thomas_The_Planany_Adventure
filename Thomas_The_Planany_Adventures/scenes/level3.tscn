@@ -1,0 +1,663 @@
+[gd_scene load_steps=73 format=3 uid="uid://bmp348cvjsrbl"]
+
+[ext_resource type="Script" path="res://scripts/level_3.gd" id="1_c1gr1"]
+[ext_resource type="PackedScene" uid="uid://b0b4wi8qwfxb6" path="res://scenes/player.tscn" id="2_jary6"]
+[ext_resource type="PackedScene" uid="uid://bjto66eav1ln0" path="res://scenes/canvas_layer.tscn" id="3_id48o"]
+[ext_resource type="AudioStream" uid="uid://dnqfgyaij106t" path="res://Sounds/heal_pickup.mp3" id="3_vl5ac"]
+[ext_resource type="PackedScene" uid="uid://cvpq4bkqj4llf" path="res://scenes/pause.tscn" id="4_qm0bi"]
+[ext_resource type="AudioStream" uid="uid://bu2lgqn634as7" path="res://Sounds/cinka_pickupsound.mp3" id="4_xjuxr"]
+[ext_resource type="FontFile" uid="uid://dsa0wwoxagbr" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="5_sf1ej"]
+[ext_resource type="AudioStream" uid="uid://ea4gay26tagf" path="res://Sounds/jump.wav" id="5_sffcg"]
+[ext_resource type="Texture2D" uid="uid://cd3j0ltwlu00x" path="res://images/uvodlevel3.png" id="6_ljjtw"]
+[ext_resource type="AudioStream" uid="uid://dwdkluktdbliw" path="res://Sounds/shoot.wav" id="6_w885t"]
+[ext_resource type="AudioStream" uid="uid://dvhokdhm2emr" path="res://Sounds/scream.wav" id="7_hcypp"]
+[ext_resource type="Texture2D" uid="uid://d0mcm2nba6yar" path="res://images/cestanadrazi.png" id="7_j2neq"]
+[ext_resource type="Texture2D" uid="uid://l4loq2psrlkc" path="res://images/ceduleKolin.png" id="8_fh5j8"]
+[ext_resource type="Texture2D" uid="uid://cthl3kbsdeoup" path="res://images/backgroundlevel3II.png" id="9_e771g"]
+[ext_resource type="Texture2D" uid="uid://b34bwlw8i68qq" path="res://images/plananycesta.png" id="9_j8gjq"]
+[ext_resource type="Texture2D" uid="uid://ux803odvw15" path="res://images/backgroundlevel3III.png" id="10_43nsl"]
+[ext_resource type="Texture2D" uid="uid://dpvbrhjknc3oo" path="res://images/zednadrazi.png" id="11_uvp6u"]
+[ext_resource type="Texture2D" uid="uid://yujopxv8lgq8" path="res://images/regiojet.png" id="12_64yt1"]
+[ext_resource type="Texture2D" uid="uid://boqmyexjrg37i" path="res://images/lavicka_kolin.png" id="13_hoqni"]
+[ext_resource type="Texture2D" uid="uid://dxpyyaxjs2f44" path="res://images/kos.png" id="14_7tvt1"]
+[ext_resource type="Texture2D" uid="uid://byueee1bs71pc" path="res://images/obchod.png" id="15_obo8q"]
+[ext_resource type="Texture2D" uid="uid://c71u7wnjok6fs" path="res://images/automat.png" id="16_wskqn"]
+[ext_resource type="Texture2D" uid="uid://cg3dmgjtcinib" path="res://images/bankomat.png" id="17_hgk22"]
+[ext_resource type="Texture2D" uid="uid://yhnpaw8uikn6" path="res://images/ulice.png" id="17_rie50"]
+[ext_resource type="Texture2D" uid="uid://cs31bu63gxy6f" path="res://images/spojeulice.png" id="18_pt764"]
+[ext_resource type="PackedScene" uid="uid://er05cue3ebah" path="res://scenes/npc_pohyblivyII.tscn" id="20_0d2wm"]
+[ext_resource type="PackedScene" uid="uid://c35xjs5jybvec" path="res://scenes/interact.tscn" id="21_dac7q"]
+[ext_resource type="PackedScene" uid="uid://dcu6fa0fbv7on" path="res://scenes/npc_pohyblivyIII.tscn" id="21_ja08h"]
+[ext_resource type="Texture2D" uid="uid://d4dvjo7jdythn" path="res://images/oknoIII.png" id="22_oc7ox"]
+[ext_resource type="PackedScene" uid="uid://b8csnqlx4g36f" path="res://scenes/npc_pohyblivy.tscn" id="23_o6mij"]
+[ext_resource type="Texture2D" uid="uid://ctaa1kl8bwoaw" path="res://images/NPC/průvodčí.png" id="24_pwsbm"]
+[ext_resource type="PackedScene" uid="uid://dytg4jy57ma8i" path="res://scenes/činka.tscn" id="25_dotr6"]
+[ext_resource type="Texture2D" uid="uid://b36fuhg1qoqs2" path="res://images/NPC/ucitel.png" id="25_fiqi8"]
+[ext_resource type="Texture2D" uid="uid://dfffwx4uhi8r7" path="res://images/NPC/tvurci-npc.png" id="26_vc6fa"]
+[ext_resource type="PackedScene" uid="uid://cf4yj4bowkj3j" path="res://scenes/actionable.tscn" id="27_2vhoi"]
+[ext_resource type="Resource" uid="uid://tl1071si78c7" path="res://dialogue/main_dialogue.dialogue" id="28_nj6ab"]
+[ext_resource type="Texture2D" uid="uid://dcfxx8gff7fg" path="res://images/NPC/npc tyna.png" id="35_bwuam"]
+[ext_resource type="Texture2D" uid="uid://dels8oedq3t8v" path="res://images/NPC/npc nikola.png" id="36_y4run"]
+[ext_resource type="Texture2D" uid="uid://c07k6mk21f52h" path="res://images/NPC/npc.png" id="37_khh1i"]
+[ext_resource type="Texture2D" uid="uid://br5o6g3h76xbe" path="res://images/NPC/npc fotbalista.png" id="37_v0lju"]
+[ext_resource type="Texture2D" uid="uid://t6cq8fkydcxp" path="res://images/NPC/NPC1.png" id="38_slkji"]
+[ext_resource type="Texture2D" uid="uid://bu3rmepsob6vm" path="res://images/NPC/npc leos.png" id="39_4i3fq"]
+[ext_resource type="AudioStream" uid="uid://bar3re7a0bprx" path="res://Sounds/level3.wav" id="43_6fx0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgegx"]
+size = Vector2(1767.28, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtb66"]
+size = Vector2(20, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iv66"]
+atlas = ExtResource("25_fiqi8")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyjc0"]
+atlas = ExtResource("25_fiqi8")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fb6oe"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_1iv66")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_yyjc0")
+}],
+"loop": true,
+"name": &"danik",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2gix"]
+atlas = ExtResource("26_vc6fa")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lk2p"]
+atlas = ExtResource("26_vc6fa")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vg7xb"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_d2gix")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_1lk2p")
+}],
+"loop": true,
+"name": &"Rosta",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n73nv"]
+radius = 16.4248
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85wyl"]
+atlas = ExtResource("24_pwsbm")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_on57k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85wyl")
+}],
+"loop": true,
+"name": &"danik",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcoln"]
+atlas = ExtResource("35_bwuam")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q72pn"]
+atlas = ExtResource("35_bwuam")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qs3b"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_vcoln")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_q72pn")
+}],
+"loop": true,
+"name": &"tyna",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy3ml"]
+atlas = ExtResource("36_y4run")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dox8u"]
+atlas = ExtResource("36_y4run")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4dfo"]
+animations = [{
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_wy3ml")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_dox8u")
+}],
+"loop": true,
+"name": &"nikca",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phi6d"]
+atlas = ExtResource("37_v0lju")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a22ak"]
+atlas = ExtResource("37_v0lju")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w6u5e"]
+animations = [{
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_phi6d")
+}, {
+"duration": 16.0,
+"texture": SubResource("AtlasTexture_a22ak")
+}],
+"loop": true,
+"name": &"fotbalista",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w7yj"]
+atlas = ExtResource("37_khh1i")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crpcx"]
+atlas = ExtResource("37_khh1i")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywokh"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_2w7yj")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_crpcx")
+}],
+"loop": true,
+"name": &"NPC",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rjhy"]
+atlas = ExtResource("38_slkji")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43ipa"]
+atlas = ExtResource("38_slkji")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_il2mt"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_4rjhy")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_43ipa")
+}],
+"loop": true,
+"name": &"NPC",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvfyp"]
+atlas = ExtResource("39_4i3fq")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i02wm"]
+atlas = ExtResource("39_4i3fq")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vt03t"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_tvfyp")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_i02wm")
+}],
+"loop": true,
+"name": &"Leos",
+"speed": 5.0
+}]
+
+[node name="Level1" type="Node"]
+script = ExtResource("1_c1gr1")
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="RespawnPoint" type="Marker2D" parent="Player"]
+position = Vector2(-60, 7)
+
+[node name="Player" parent="Player" instance=ExtResource("2_jary6")]
+position = Vector2(-244.054, 9)
+scale = Vector2(1.35, 1.35)
+collision_layer = 2
+
+[node name="Camera2D" type="Camera2D" parent="Player/Player"]
+position = Vector2(1, -5)
+zoom = Vector2(6, 6)
+limit_left = -161
+limit_right = 1390
+limit_bottom = 30
+position_smoothing_enabled = true
+
+[node name="Soundy" type="Node2D" parent="Player/Player"]
+
+[node name="Pickupsound" type="AudioStreamPlayer2D" parent="Player/Player/Soundy"]
+position = Vector2(244.054, -9)
+stream = ExtResource("3_vl5ac")
+volume_db = 15.0
+
+[node name="CinkaPickupsound2" type="AudioStreamPlayer2D" parent="Player/Player/Soundy"]
+position = Vector2(244.054, -9)
+stream = ExtResource("4_xjuxr")
+volume_db = 15.0
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Player/Player/Soundy"]
+position = Vector2(244.054, -9)
+stream = ExtResource("5_sffcg")
+volume_db = -11.0
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Player/Player/Soundy"]
+position = Vector2(244.054, -9)
+stream = ExtResource("6_w885t")
+volume_db = -11.0
+
+[node name="Enemy-scream" type="AudioStreamPlayer2D" parent="Player/Player/Soundy"]
+position = Vector2(244.054, -9)
+stream = ExtResource("7_hcypp")
+volume_db = 0.03
+
+[node name="CanvasLayer" parent="Player" instance=ExtResource("3_id48o")]
+
+[node name="Pause" parent="Player/CanvasLayer" instance=ExtResource("4_qm0bi")]
+process_mode = 3
+pivot_offset = Vector2(-172, 192)
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="Text" type="Node2D" parent="Background"]
+
+[node name="Interact" type="Node2D" parent="Background/Text"]
+visible = false
+
+[node name="Interakce" type="Label" parent="Background/Text/Interact"]
+z_index = 10
+offset_left = -212.0
+offset_top = -37.0
+offset_right = -131.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("5_sf1ej")
+theme_override_font_sizes/font_size = 8
+text = "Interakce[E]"
+
+[node name="Interakce2" type="Label" parent="Background/Text/Interact"]
+z_index = 10
+offset_left = 1151.0
+offset_top = -26.0
+offset_right = 1232.0
+offset_bottom = -18.0
+theme_override_fonts/font = ExtResource("5_sf1ej")
+theme_override_font_sizes/font_size = 8
+text = "Interakce[E]"
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+z_index = -2
+offset_left = 460.0
+offset_top = -208.0
+offset_right = 917.0
+offset_bottom = 9.0
+
+[node name="Uvodlevel3" type="Sprite2D" parent="Background"]
+position = Vector2(-248.054, -71)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("6_ljjtw")
+
+[node name="OknoIii" type="Sprite2D" parent="Background"]
+position = Vector2(587.946, -99)
+scale = Vector2(1.48667, 1.48667)
+texture = ExtResource("22_oc7ox")
+
+[node name="OknoIii2" type="Sprite2D" parent="Background"]
+position = Vector2(788.946, -99)
+scale = Vector2(1.487, 1.487)
+texture = ExtResource("22_oc7ox")
+
+[node name="Cestanadrazi" type="Sprite2D" parent="Background"]
+position = Vector2(478.946, 10)
+scale = Vector2(16.12, 3.77)
+texture = ExtResource("7_j2neq")
+
+[node name="CeduleKolin" type="Sprite2D" parent="Background"]
+position = Vector2(-284.054, -36)
+scale = Vector2(1.84, 1.84)
+texture = ExtResource("8_fh5j8")
+
+[node name="Backgroundlevel3ii" type="Sprite2D" parent="Background"]
+position = Vector2(-92.054, -71)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("9_e771g")
+
+[node name="Backgroundlevel3ii2" type="Sprite2D" parent="Background"]
+position = Vector2(218.946, -71)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("9_e771g")
+
+[node name="Backgroundlevel3iii" type="Sprite2D" parent="Background"]
+position = Vector2(62.946, -71)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("10_43nsl")
+
+[node name="Backgroundlevel3iii2" type="Sprite2D" parent="Background"]
+position = Vector2(374.946, -71)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("10_43nsl")
+
+[node name="Zednadrazi" type="Sprite2D" parent="Background"]
+z_index = 21
+position = Vector2(416.946, -71.5)
+scale = Vector2(1, 2.43)
+texture = ExtResource("11_uvp6u")
+
+[node name="Zednadrazi2" type="Sprite2D" parent="Background"]
+z_index = 21
+position = Vector2(872.946, -71.5)
+scale = Vector2(1, 2.43)
+texture = ExtResource("11_uvp6u")
+
+[node name="Regiojet" type="Sprite2D" parent="Background"]
+position = Vector2(539.446, -55.5)
+scale = Vector2(1.17, 1.17)
+texture = ExtResource("12_64yt1")
+
+[node name="LavickaKolin" type="Sprite2D" parent="Background"]
+position = Vector2(625.946, -5)
+texture = ExtResource("13_hoqni")
+
+[node name="Kos" type="Sprite2D" parent="Background"]
+position = Vector2(655.946, -12)
+scale = Vector2(0.642857, 0.642857)
+texture = ExtResource("14_7tvt1")
+
+[node name="Obchod" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(770.946, -53)
+scale = Vector2(1.14, 1.14)
+texture = ExtResource("15_obo8q")
+
+[node name="Automat" type="Sprite2D" parent="Background"]
+position = Vector2(862.196, -28.25)
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("16_wskqn")
+
+[node name="Bankomat" type="Sprite2D" parent="Background"]
+position = Vector2(698.946, -56)
+scale = Vector2(1.435, 1.435)
+texture = ExtResource("17_hgk22")
+
+[node name="Ulice" type="Sprite2D" parent="Background"]
+position = Vector2(999.446, -76)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("17_rie50")
+
+[node name="Spojeulice" type="Sprite2D" parent="Background"]
+position = Vector2(1153.95, -76)
+scale = Vector2(1.565, 1.565)
+texture = ExtResource("18_pt764")
+
+[node name="Mapa" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="Plananycesta" type="Sprite2D" parent="Mapa"]
+visible = false
+position = Vector2(1166.95, -29)
+scale = Vector2(12.04, 1.004)
+texture = ExtResource("9_j8gjq")
+
+[node name="podlaha" type="StaticBody2D" parent="Mapa/Plananycesta"]
+position = Vector2(-94.5297, 43.8247)
+scale = Vector2(0.184911, 0.996016)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/Plananycesta/podlaha"]
+position = Vector2(719.467, 8)
+shape = SubResource("RectangleShape2D_hgegx")
+
+[node name="Border" type="StaticBody2D" parent="Mapa"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/Border"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-331.054, -37.5)
+shape = SubResource("RectangleShape2D_qtb66")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mapa/Border"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(1241.95, -53)
+shape = SubResource("RectangleShape2D_qtb66")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mapa/Border"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(2671.95, -53)
+shape = SubResource("RectangleShape2D_qtb66")
+
+[node name="OneWayCollisions" type="Node2D" parent="Mapa"]
+
+[node name="Interact" type="Node2D" parent="Mapa"]
+
+[node name="Interact2" parent="Mapa/Interact" instance=ExtResource("21_dac7q")]
+position = Vector2(-176.054, 11)
+
+[node name="Interact" parent="Mapa/Interact" instance=ExtResource("21_dac7q")]
+position = Vector2(1188.95, 15.03)
+
+[node name="Činky" type="Node2D" parent="Mapa"]
+
+[node name="Činka" parent="Mapa/Činky" instance=ExtResource("25_dotr6")]
+position = Vector2(826.946, 7)
+
+[node name="Enemy" type="Node2D" parent="Mapa"]
+
+[node name="Heal" type="Node2D" parent="."]
+
+[node name="Coin" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(163.054, 0)
+
+[node name="Kolizní objekty" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="NPC" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="enemy_knight" parent="NPC" instance=ExtResource("20_0d2wm")]
+z_index = 20
+position = Vector2(-293.054, -6)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight10" parent="NPC" instance=ExtResource("20_0d2wm")]
+z_index = 20
+position = Vector2(253.946, -6)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight4" parent="NPC" instance=ExtResource("20_0d2wm")]
+z_index = 20
+position = Vector2(1057.95, -6)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight9" parent="NPC" instance=ExtResource("20_0d2wm")]
+z_index = 20
+position = Vector2(351.946, -6)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight2" parent="NPC" instance=ExtResource("21_ja08h")]
+z_index = 20
+position = Vector2(713.946, -5)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight8" parent="NPC" instance=ExtResource("21_ja08h")]
+z_index = 20
+position = Vector2(-97.054, -5)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight5" parent="NPC" instance=ExtResource("21_ja08h")]
+z_index = 20
+position = Vector2(192.946, -5)
+scale = Vector2(1.31, 1.31)
+
+[node name="enemy_knight3" parent="NPC" instance=ExtResource("23_o6mij")]
+z_index = 19
+position = Vector2(1213.95, 9)
+
+[node name="enemy_knight6" parent="NPC" instance=ExtResource("23_o6mij")]
+z_index = 19
+position = Vector2(1684.95, 9)
+
+[node name="enemy_knight7" parent="NPC" instance=ExtResource("23_o6mij")]
+z_index = 19
+position = Vector2(2624.95, 9)
+
+[node name="NPC-reditel" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(1140.95, -59)
+scale = Vector2(2.1, 2.1)
+sprite_frames = SubResource("SpriteFrames_fb6oe")
+animation = &"danik"
+autoplay = "danik"
+
+[node name="NPC-Linh" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(-177.054, -20.9)
+scale = Vector2(1.95, 1.95)
+sprite_frames = SubResource("SpriteFrames_vg7xb")
+animation = &"Rosta"
+autoplay = "Rosta"
+
+[node name="Actionable" parent="NPC/NPC-Linh" instance=ExtResource("27_2vhoi")]
+position = Vector2(-1, -15)
+dialogue_resource = ExtResource("28_nj6ab")
+dialogue_start = "linh"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/NPC-Linh/Actionable"]
+position = Vector2(1.66667, 19.6667)
+shape = SubResource("CircleShape2D_n73nv")
+
+[node name="NPC-Linh2" type="AnimatedSprite2D" parent="NPC"]
+visible = false
+position = Vector2(1188.95, -15)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_vg7xb")
+animation = &"Rosta"
+autoplay = "Rosta"
+
+[node name="Actionable" parent="NPC/NPC-Linh2" instance=ExtResource("27_2vhoi")]
+position = Vector2(-1, -15)
+dialogue_resource = ExtResource("28_nj6ab")
+dialogue_start = "spoje"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/NPC-Linh2/Actionable"]
+position = Vector2(1.66667, 19.6667)
+shape = SubResource("CircleShape2D_n73nv")
+
+[node name="NPC-Danik" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(386.946, -40)
+scale = Vector2(1.72, 1.72)
+sprite_frames = SubResource("SpriteFrames_on57k")
+animation = &"danik"
+autoplay = "danik"
+
+[node name="NPC" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(175.946, -57)
+scale = Vector2(1.715, 1.715)
+sprite_frames = SubResource("SpriteFrames_2qs3b")
+animation = &"tyna"
+autoplay = "tyna"
+
+[node name="NPC2" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(153.946, -56)
+scale = Vector2(1.745, 1.745)
+sprite_frames = SubResource("SpriteFrames_k4dfo")
+animation = &"nikca"
+autoplay = "nikca"
+frame_progress = 0.477948
+
+[node name="NPC3" type="AnimatedSprite2D" parent="NPC"]
+z_index = 20
+position = Vector2(25.946, 6)
+scale = Vector2(2.22, 2.22)
+sprite_frames = SubResource("SpriteFrames_w6u5e")
+animation = &"fotbalista"
+autoplay = "fotbalista"
+
+[node name="NPC4" type="AnimatedSprite2D" parent="NPC"]
+z_index = 20
+position = Vector2(489.946, 14)
+scale = Vector2(1.51892, 1.51892)
+sprite_frames = SubResource("SpriteFrames_ywokh")
+animation = &"NPC"
+autoplay = "NPC"
+
+[node name="NPC5" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(9.94599, -34)
+scale = Vector2(1.35892, 1.35892)
+sprite_frames = SubResource("SpriteFrames_il2mt")
+animation = &"NPC"
+autoplay = "NPC"
+
+[node name="NPC-Leos" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(930.946, -47)
+scale = Vector2(1.505, 1.505)
+sprite_frames = SubResource("SpriteFrames_vt03t")
+animation = &"Leos"
+autoplay = "Leos"
+
+[node name="Soundy" type="Node2D" parent="."]
+position = Vector2(163.054, 0)
+
+[node name="nadrazi" type="AudioStreamPlayer2D" parent="Soundy"]
+position = Vector2(-63.054, -63)
+stream = ExtResource("43_6fx0j")
+volume_db = -5.0
+autoplay = true
+
+[node name="mexickytrh" type="AudioStreamPlayer2D" parent="Soundy"]
+position = Vector2(652.946, -86)
+stream = ExtResource("43_6fx0j")
+volume_db = -5.0
+autoplay = true
+
+[node name="silnice" type="AudioStreamPlayer2D" parent="Soundy"]
+position = Vector2(1080.95, -65)
+stream = ExtResource("43_6fx0j")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="ready" from="Player/Player/Camera2D" to="." method="_on_camera_2d_ready"]

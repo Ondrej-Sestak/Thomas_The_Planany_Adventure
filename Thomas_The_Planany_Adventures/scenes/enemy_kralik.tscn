@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxi0qdvij3uhx"]
+
+[ext_resource type="Texture2D" uid="uid://drxrimbcb3w7y" path="res://images/angry rabbit.png" id="1_14dxf"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="2_ansq2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyjg4"]
+atlas = ExtResource("1_14dxf")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iqt7"]
+atlas = ExtResource("1_14dxf")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tgy6m"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_iyjg4")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_0iqt7")
+}],
+"loop": true,
+"name": &"kralik",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w0yr2"]
+radius = 17.0
+
+[node name="EnemyKralik" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tgy6m")
+animation = &"kralik"
+frame_progress = 0.172295
+
+[node name="killzone" parent="." instance=ExtResource("2_ansq2")]
+position = Vector2(3, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-7, 5)
+shape = SubResource("CircleShape2D_w0yr2")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cul2e7ta3bqam"]
+
+[ext_resource type="Texture2D" uid="uid://chsve748ln61v" path="res://images/NPC/vesnican.png" id="1_i1if4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6fe8"]
+atlas = ExtResource("1_i1if4")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dx76"]
+atlas = ExtResource("1_i1if4")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quwwp"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_l6fe8")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_3dx76")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="NPS skeleton" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -27)
+scale = Vector2(1.785, 1.785)
+sprite_frames = SubResource("SpriteFrames_quwwp")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.569432
+flip_h = true

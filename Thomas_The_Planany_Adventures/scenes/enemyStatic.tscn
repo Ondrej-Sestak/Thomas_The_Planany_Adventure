@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://yvgrsjn0k8lo"]
+
+[ext_resource type="Script" path="res://scripts/enemy_static.gd" id="1_v07p8"]
+[ext_resource type="Texture2D" uid="uid://cub17nn6bbw0d" path="res://images/enemy/enemy_static.png" id="2_7iqib"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="3_eux7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns835"]
+atlas = ExtResource("2_7iqib")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5nvn"]
+atlas = ExtResource("2_7iqib")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbcpt"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ns835")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_i5nvn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko7vb"]
+size = Vector2(10.2752, 20.7401)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b18wg"]
+size = Vector2(19, 35)
+
+[node name="enemy_knight" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_v07p8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, -39.7625)
+scale = Vector2(2.1295, 2.1295)
+sprite_frames = SubResource("SpriteFrames_rbcpt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.582969
+flip_h = true
+
+[node name="killzone" parent="." instance=ExtResource("3_eux7o")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-0.5, -0.165229)
+scale = Vector2(1.84912, -1.33411)
+shape = SubResource("RectangleShape2D_ko7vb")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-0.5, -3.5)
+shape = SubResource("RectangleShape2D_b18wg")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]

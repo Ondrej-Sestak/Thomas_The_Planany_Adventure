@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4tsnkpe7km6k"]
+
+[ext_resource type="Script" path="res://scripts/enemy_knight.gd" id="1_vssc8"]
+[ext_resource type="AudioStream" uid="uid://cvc4r567qno3k" path="res://Sounds/enemy-african.mp3" id="4_e4xps"]
+[ext_resource type="AudioStream" uid="uid://dp448w8k2cgp7" path="res://Sounds/enemak.mp3" id="5_s2bfb"]
+[ext_resource type="Texture2D" uid="uid://ba80vk2v84hkm" path="res://images/enemy/enemy.png" id="6_8h2dh"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="7_m341h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6fvv"]
+atlas = ExtResource("6_8h2dh")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwnbv"]
+atlas = ExtResource("6_8h2dh")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehsg4"]
+atlas = ExtResource("6_8h2dh")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kwwq"]
+atlas = ExtResource("6_8h2dh")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbcpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6fvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwnbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehsg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kwwq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko7vb"]
+size = Vector2(4.86718, 15.4931)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbrkx"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b18wg"]
+size = Vector2(18, 25)
+
+[node name="enemy_knight" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_vssc8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+scale = Vector2(1.638, 1.638)
+sprite_frames = SubResource("SpriteFrames_rbcpt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.347439
+flip_h = true
+
+[node name="killzone" parent="." instance=ExtResource("7_m341h")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-0.5, 3.33478)
+scale = Vector2(1.84912, -1.33411)
+shape = SubResource("RectangleShape2D_ko7vb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_fbrkx")
+
+[node name="raycast_left" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(-11.0207, 12)
+
+[node name="raycast_right" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(8.81655, 12)
+
+[node name="floor_raycast_right" type="RayCast2D" parent="."]
+position = Vector2(10, 0)
+target_position = Vector2(0, 19)
+
+[node name="floor_raycast_left" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 19)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_b18wg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_e4xps")
+volume_db = -80.0
+
+[node name="enemak-chuze" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_s2bfb")
+volume_db = -30.0
+autoplay = true
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]

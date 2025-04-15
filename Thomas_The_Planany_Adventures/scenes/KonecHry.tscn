@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8117gawbfh2n"]
+
+[ext_resource type="Script" path="res://scripts/konec_hry.gd" id="1_060qo"]
+[ext_resource type="Texture2D" uid="uid://cd3j0ltwlu00x" path="res://images/uvodlevel3.png" id="2_tydti"]
+[ext_resource type="FontFile" uid="uid://bfogft582ect0" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_28mq3"]
+[ext_resource type="Theme" uid="uid://co56ai25f5dd4" path="res://default.tres" id="4_0tcbc"]
+[ext_resource type="FontFile" uid="uid://dsa0wwoxagbr" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="5_ebm2n"]
+[ext_resource type="Script" path="res://Play.gd" id="6_7by6i"]
+[ext_resource type="Texture2D" uid="uid://l4loq2psrlkc" path="res://images/ceduleKolin.png" id="7_s2gpb"]
+
+[node name="KonecHry" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_060qo")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -3.0
+offset_right = -11.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tydti")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -309.0
+offset_right = 445.0
+offset_bottom = -309.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_28mq3")
+theme_override_font_sizes/font_size = 128
+text = "GRATULUJEME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VSeparator4" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+
+[node name="Znovu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_0tcbc")
+theme_override_fonts/font = ExtResource("5_ebm2n")
+theme_override_font_sizes/font_size = 48
+text = "ZNOVU"
+script = ExtResource("6_7by6i")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Konec" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_0tcbc")
+theme_override_fonts/font = ExtResource("5_ebm2n")
+theme_override_font_sizes/font_size = 48
+text = "KONEC"
+
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="CeduleKolin" type="Sprite2D" parent="."]
+position = Vector2(505, 780)
+scale = Vector2(20.08, 20.08)
+texture = ExtResource("7_s2gpb")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Znovu" to="." method="_on_znovu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Znovu" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Znovu" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Konec" to="." method="_on_konec_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Konec" to="." method="_on_hard_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Konec" to="." method="_on_quit_pressed"]

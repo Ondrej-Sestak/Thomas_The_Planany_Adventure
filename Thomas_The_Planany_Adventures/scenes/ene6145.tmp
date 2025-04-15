@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4tsnkpe7km6k"]
+
+[ext_resource type="Script" path="res://scripts/enemy_knight.gd" id="1_caiiw"]
+[ext_resource type="Texture2D" uid="uid://dmhnil8laoxfw" path="res://Fantasy Pack Free Tier/KNIGHTS/KNIGHT_DARK/WALK/KNIGHT_DARK_WALK.png" id="2_3lg8i"]
+[ext_resource type="PackedScene" uid="uid://cbfwrf4gw30sa" path="res://scenes/killzone.tscn" id="2_awmuy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiynp"]
+atlas = ExtResource("2_3lg8i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gs8y"]
+atlas = ExtResource("2_3lg8i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja2ag"]
+atlas = ExtResource("2_3lg8i")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy3ge"]
+atlas = ExtResource("2_3lg8i")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbcpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fiynp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gs8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy3ge")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko7vb"]
+size = Vector2(12.9791, 18.2437)
+
+[node name="enemy_knight" type="Node2D"]
+script = ExtResource("1_caiiw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.71624, 1.71624)
+sprite_frames = SubResource("SpriteFrames_rbcpt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.856116
+
+[node name="killzone" parent="." instance=ExtResource("2_awmuy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+visible = false
+position = Vector2(1.19209e-07, 1.5)
+scale = Vector2(1.84912, -1.33411)
+shape = SubResource("RectangleShape2D_ko7vb")
+
+[node name="raycast_left" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(-13.2248, 0)
+
+[node name="raycast_right" type="RayCast2D" parent="."]
+scale = Vector2(0.907384, 1)
+target_position = Vector2(13.2248, 0)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(10, 0)
+target_position = Vector2(0, 14)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 14)

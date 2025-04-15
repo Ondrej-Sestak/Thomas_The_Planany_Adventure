@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5wm2cxg1scwd"]
+
+[ext_resource type="Texture2D" uid="uid://csbfn1nxm64hv" path="res://images/NPC/kocka.png" id="1_bxky1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuuvb"]
+atlas = ExtResource("1_bxky1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ute51"]
+atlas = ExtResource("1_bxky1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quwwp"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_uuuvb")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ute51")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="NPS skeleton" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.33953, 0.33953)
+sprite_frames = SubResource("SpriteFrames_quwwp")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.576604
+flip_h = true

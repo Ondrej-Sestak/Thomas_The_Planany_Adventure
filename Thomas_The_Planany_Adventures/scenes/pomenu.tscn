@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5aev737pyk2r"]
+
+[ext_resource type="Script" path="res://scripts/pomenu.gd" id="1_icj5k"]
+[ext_resource type="FontFile" uid="uid://dsa0wwoxagbr" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_3ppuh"]
+[ext_resource type="Theme" uid="uid://co56ai25f5dd4" path="res://default.tres" id="2_kgqgd"]
+[ext_resource type="Texture2D" uid="uid://c1wk83eu0mt7s" path="res://images/uvodni.png" id="2_srfwy"]
+[ext_resource type="FontFile" uid="uid://bfogft582ect0" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_o87at"]
+[ext_resource type="Script" path="res://Play.gd" id="7_h2q3t"]
+[ext_resource type="AudioStream" uid="uid://dxo2ltu5hlff0" path="res://Sounds/rock-uvod.mp3" id="7_h4tvx"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_icj5k")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -3.0
+offset_right = -4.0
+offset_bottom = 263.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_srfwy")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -309.0
+offset_right = 445.0
+offset_bottom = -309.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.890196, 0.890196, 0.890196, 1)
+theme_override_fonts/font = ExtResource("3_o87at")
+theme_override_font_sizes/font_size = 128
+text = "THOMAS
+THE PLANANY
+ADVENTURE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VSeparator4" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+
+[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kgqgd")
+theme_override_fonts/font = ExtResource("2_3ppuh")
+theme_override_font_sizes/font_size = 48
+text = "LEHKE"
+script = ExtResource("7_h2q3t")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Hard" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kgqgd")
+theme_override_fonts/font = ExtResource("2_3ppuh")
+theme_override_font_sizes/font_size = 48
+text = "TEZKE"
+
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="znelka" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_h4tvx")
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_hard_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_quit_pressed"]

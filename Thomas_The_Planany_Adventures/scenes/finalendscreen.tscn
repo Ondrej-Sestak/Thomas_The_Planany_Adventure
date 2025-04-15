@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://bltux5ion0ge6"]
+
+[ext_resource type="Script" path="res://scripts/finalendscreen.gd" id="1_njiao"]
+[ext_resource type="Texture2D" uid="uid://fhtjloc20tx7" path="res://videos/endanimation0001.jpg" id="1_ro75x"]
+[ext_resource type="Texture2D" uid="uid://c4dogrbotw4o5" path="res://videos/endanimation0002.jpg" id="2_ap3jg"]
+[ext_resource type="Texture2D" uid="uid://ci7n1xq0rn3js" path="res://videos/endanimation0003.jpg" id="3_quqy0"]
+[ext_resource type="Texture2D" uid="uid://dmfa2rs35l8gi" path="res://videos/endanimation0004.jpg" id="4_weh6l"]
+[ext_resource type="Texture2D" uid="uid://dyg8avu0v5h7f" path="res://videos/endanimation0005.jpg" id="5_uepvh"]
+[ext_resource type="Texture2D" uid="uid://bp5x648rmpcdl" path="res://videos/endanimation0006.jpg" id="6_spep7"]
+[ext_resource type="Texture2D" uid="uid://dwffh28pntaix" path="res://videos/endanimation0007.jpg" id="7_hh6y7"]
+[ext_resource type="Theme" uid="uid://co56ai25f5dd4" path="res://default.tres" id="9_xxuih"]
+[ext_resource type="FontFile" uid="uid://dsa0wwoxagbr" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="10_ie8e3"]
+
+[sub_resource type="Animation" id="Animation_6rwa2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ro75x")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mi67x"]
+resource_name = "end"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_ro75x"), ExtResource("2_ap3jg"), ExtResource("3_quqy0"), ExtResource("4_weh6l"), ExtResource("5_uepvh"), ExtResource("6_spep7"), ExtResource("7_hh6y7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tsqya"]
+_data = {
+"RESET": SubResource("Animation_6rwa2"),
+"end": SubResource("Animation_mi67x")
+}
+
+[node name="finaleendscreen" type="CanvasLayer"]
+script = ExtResource("1_njiao")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tsqya")
+}
+autoplay = "end"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ro75x")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="VSeparator4" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_xxuih")
+theme_override_fonts/font = ExtResource("10_ie8e3")
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_xxuih")
+theme_override_fonts/font = ExtResource("10_ie8e3")
+theme_override_font_sizes/font_size = 48
+text = "QUIT"
+
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("10_ie8e3")
+theme_override_font_sizes/font_size = 64
+text = "Time: 00:00
+
+"
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
